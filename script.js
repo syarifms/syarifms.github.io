@@ -110,8 +110,6 @@ async function initFirebase() {
     body: JSON.stringify({ name: 'Functions' })
   });
   const secret = await res.json();
-  
-  alert(secret.apiKey);
   const firebaseConfig = {
     apiKey: secret.apiKey,
     authDomain: "cobainchat.firebaseapp.com",
@@ -120,14 +118,9 @@ async function initFirebase() {
 
   firebase.initializeApp(firebaseConfig);
 
-  main();
 }
 
-function main(){
-  
 
-
-const db = firebase.firestore();
 
 let uid = "";
 let partner = "";
@@ -135,6 +128,8 @@ let chatRef;
 
 
 async function handleMulaiButton() {
+  
+const db = firebase.firestore();
 
   const pin = pinField.value.trim();
 
@@ -149,6 +144,8 @@ async function handleMulaiButton() {
   
 }
 async function login() {
+  
+const db = firebase.firestore();
   const userId = usernameField.value.trim();
   const pin = passwordField.value.trim();
 
@@ -200,4 +197,3 @@ function startChat() {
   });
 }
 
-}

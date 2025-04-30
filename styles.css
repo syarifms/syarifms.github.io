@@ -48,6 +48,16 @@ h1 {
   text-decoration: none;
   display: inline-block;
 }
+.popup-content-login {
+  padding: 20px
+}
+
+.floating-button{
+  position: absolute;
+  top: 20px;
+
+  right: 20px;
+}
 
 .button:hover {
   background-color: #ff80ab;
@@ -107,6 +117,10 @@ h1 {
   color: #ff0000;
   font-size: 18px;
   margin-top: 15px;
+}
+
+.close-button-login {
+  position: static!important;
 }
 
 .close-button {
@@ -247,6 +261,38 @@ h1 {
   }
   
   
+  input[type="text"],
+input[type="password"], textarea {
+  padding: 10px 14px;
+  margin: 6px 0;
+  font-size: 16px;
+  font-family: 'Press Start 2P', sans-serif;
+  border: 3px solid #9c6cff;
+  border-radius: 6px;
+  background-color: #fff;
+  color: #333;
+  outline: none;
+  box-shadow: 0 0 0 4px transparent;
+  transition: all 0.2s ease-in-out;
+}
+
+textarea {
+  
+  font-size: 12px !important;
+  font-family:  sans-serif!important;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus, textarea:focus {
+  box-shadow: 0 0 0 4px #cba3ff99;
+  border-color: #cba3ff;
+}
+
+::placeholder {
+  color: #bbb;
+  font-size: 14px;
+}
+
   
 
   

@@ -109,8 +109,9 @@ async function initFirebase() {
     },
     body: JSON.stringify({ name: 'Functions' })
   });
-  alert(secret.apiKey);
   const secret = await res.json();
+  
+  alert(secret.apiKey);
   const firebaseConfig = {
     apiKey: secret.apiKey,
     authDomain: "cobainchat.firebaseapp.com",

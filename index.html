@@ -5,8 +5,63 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Welcome Page - Retro Romantis</title>
   <link rel="stylesheet" href="styles.css">
+
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
 </head>
 <body>
+
+  <div id="mulai-container" style="width: 100vw; height: 100vh; background-color: #ff80ab; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative;">
+    <div style="
+        display: flex;
+        flex-direction: column;" >
+        <input placeholder="Password" id="pin-field" type="password"/>
+
+
+        <button id="mulaiButton" class="button" style="margin-top: 10px;">Login</button>
+
+      </div>
+  </div>
+
+  
+    <div id="after-container" style="display: none;">
+      <div class="floating-button button" id="showPopUpLogin">Login</div>
+
+  <div id="popup-login" class="popup popup-login">
+    <div class="popup-content popup-content-login" style="width: 250px;">
+
+      <div style="display: flex; flex-direction: row; justify-content: space-between;margin-bottom: 20px;">
+        <h2 style="margin: 0;" id="title-form">Login</h2>
+      <button id="closePopupLogin" class="close-button close-button-login">X</button>
+      </div>
+
+      <div style="
+        display: flex;
+        flex-direction: column;
+
+      " id="loginForm">
+        <input placeholder="Username" id="username-field" type="text" />
+        <input placeholder="Password" id="password-field" type="password"/>
+
+
+        <button id="loginFormButton" class="button" style="margin-top: 10px;">Login</button>
+
+      </div>
+
+      <div id="chatForm" style="
+        display: flex;
+        flex-direction: column;
+        display: none;
+
+      ">
+        <textarea placeholder="Ketik pesanmu disini" id="text-saya" rows="4" cols="30"></textarea>
+        <textarea placeholder="Ketik pesanmu disini" id="text-dia" rows="4" cols="30" readonly></textarea>
+      </div>
+
+      
+      
+    </div>
+  </div>
 
   <h1>Welcome to Our Gallery</h1>
 
@@ -39,6 +94,7 @@
       <p id="exitPopupMessage">Terimakasih Sayang, ILY</p>
     </div>
   </div>
+    </div>
 
   <script src="script.js"></script>
 </body>

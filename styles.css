@@ -1,5 +1,39 @@
 @import url('https://fonts.googleapis.com/css2?family=Sacramento&family=Press+Start+2P&display=swap');
 
+
+/* Scrollbar untuk browser berbasis WebKit */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #fce4ec; /* Warna latar belakang track (opsional) */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #f06292; /* Warna utama scrollbar */
+  border-radius: 10px;
+  border: 3px solid #fce4ec; /* Agar terlihat punya padding */
+}
+
+
+/* Scrollbar untuk Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #f06292 #fce4ec;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent; /* Latar belakang transparan */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #f06292; /* Warna scroll handle */
+  border-radius: 10px;
+}
+
+
 body {
   font-family: 'Press Start 2P', sans-serif;
   background-color: #f4c2c2;
@@ -156,6 +190,7 @@ h1 {
 }
 /* CSS tambahan untuk gallery */
 .gallery-container {
+  overflow: auto;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 15px;

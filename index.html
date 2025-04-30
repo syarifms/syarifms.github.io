@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome Page - Retro Romantis</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <h1>Welcome to Our Gallery</h1>
+
+  <div class="menu">
+    <div class="button" id="startButton">Start</div>
+
+    <a href="gallery.html" id="loveStoryButton" class="button" style="display: none;">Love Story</a>
+    <div id="exitButton" class="button" style="display: none;">Exit</div>
+  </div>
+
+  <!-- Pop-up Modal untuk Start -->
+  <div id="popup" class="popup">
+    <div class="popup-content">
+      <button id="closePopup" class="close-button">X</button>
+      <p id="popup-message">Kamu sayang aku nggak?</p>
+      <div class="choices">
+        <button id="yesButton" class="button">Yes</button>
+        <button id="noButton" class="button">No</button>
+      </div>
+      <p id="errorMessage" class="error-message"> kamu harus klik yes dulu baru lanjut :P</p>
+    </div>
+  </div>
+
+  
+
+  <!-- Pop-up Modal untuk Exit -->
+  <div id="exitPopup" class="popup">
+    <div class="popup-content">
+      <button id="closeExitPopup" class="close-button">X</button>
+      <p id="exitPopupMessage">Terimakasih Sayang, ILY</p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

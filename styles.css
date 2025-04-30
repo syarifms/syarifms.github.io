@@ -79,6 +79,11 @@ h1 {
   z-index: 1000;
 }
 
+.popup-login {
+  align-items: start!important;
+  padding-top: 40px;
+}
+
 .popup-content {
   background-color: #fff;
   color: #6a1b9a;

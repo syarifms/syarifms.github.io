@@ -98,13 +98,25 @@ loginFormButton.addEventListener('click', (event) => {
 });
 
 
-const firebaseConfig = {
 
-  apiKey: "AIzaSyDRAq8Ts-Aoy8OnRIIe3OLA3-pvpziZ214",
+const res = await fetch('https://qqihspdqkpjopgzjluxv.supabase.co/functions/v1/getSecret', {
+  method: 'POST',
+  headers: {
+    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFxaWhzcGRxa3Bqb3BnempsdXh2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDYwNDY0NTksImV4cCI6MjA2MTYyMjQ1OX0.PAxOZVqvy8MwW9xzkPD032ROomwLF-D5uHIQvof9PSc',
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({ name: 'Functions' })
+});
+alert(secret.apiKey);
+const secret = await res.json();
+const firebaseConfig = {
+  apiKey: secret.apiKey,
   authDomain: "cobainchat.firebaseapp.com",
-  projectId: "cobainchat",
+  projectId: "cobainchat"
 };
+
 firebase.initializeApp(firebaseConfig);
+
 const db = firebase.firestore();
 
 let uid = "";

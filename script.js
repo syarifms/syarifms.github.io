@@ -170,6 +170,8 @@ const db = firebase.firestore();
 }
 
 function startChat() {
+
+  const db = firebase.firestore();
   const sessionId = uid < partner ? `${uid}_${partner}` : `${partner}_${uid}`;
   chatRef = db.collection("realtimeChats").doc(sessionId);
 

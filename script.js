@@ -1,9 +1,9 @@
+// Ambil elemen-elemen dari DOM
 const startButton = document.getElementById('startButton');
 const popup = document.getElementById('popup');
 
 const titleForm = document.getElementById('title-form');
 const mulaiButton = document.getElementById('mulaiButton');
-
 
 const usernameField = document.getElementById('username-field');
 const passwordField = document.getElementById('password-field');
@@ -14,7 +14,6 @@ const afterContainer = document.getElementById('after-container');
 
 const textSaya = document.getElementById('text-saya');
 const textDia = document.getElementById('text-dia');
-
 
 const loginForm = document.getElementById('loginForm');
 const loginFormButton = document.getElementById('loginFormButton');
@@ -37,21 +36,20 @@ const showPopUpLogin = document.getElementById('showPopUpLogin');
 
 let count = 0;
 
+// Event untuk popup login
 showPopUpLogin.addEventListener('click', () => {
   popupLogin.style.display = 'flex';
 });
 
-// Tampilkan popup Start saat tombol Start diklik
+// Popup Start
 startButton.addEventListener('click', () => {
   popup.style.display = 'flex';
   popupMessage.textContent = 'Kamu sayang aku nggak?';
   errorMessage.textContent = '';
 });
 
-// Tombol Yes
 yesButton.addEventListener('click', () => {
   count++;
-
   if (count < 3) {
     popupMessage.textContent = `Beneran sayang? (${count})`;
     errorMessage.textContent = '';
@@ -64,12 +62,10 @@ yesButton.addEventListener('click', () => {
   }
 });
 
-// Tombol No
 noButton.addEventListener('click', () => {
   errorMessage.textContent = 'Kamu harus klik Yes baru bisa lanjut';
 });
 
-// Tombol tutup popup Start
 closeButton.addEventListener('click', () => {
   popup.style.display = 'none';
 });
@@ -78,29 +74,36 @@ closeButtonLogin.addEventListener('click', () => {
   popupLogin.style.display = 'none';
 });
 
-// Tombol Exit
 exitButton.addEventListener('click', () => {
   exitPopup.style.display = 'flex';
 });
 
-// Tombol tutup popup Exit
 closeExitPopup.addEventListener('click', () => {
   exitPopup.style.display = 'none';
 });
 
+let uid = "";
+let partner = "";
+let chatRef;
 
-mulaiButton.addEventListener('click', () => {
-  handleMulaiButton();
+// ✅ Init Firebase dan tambahkan listener SETELAH siap
+initFirebase().then(() => {
+  console.log("Firebase siap!");
+
+  loginFormButton.addEventListener('click', () => {
+    login();
+  });
+
+  mulaiButton.addEventListener('click', () => {
+    handleMulaiButton();
+  });
+
+}).catch((err) => {
+  console.error("Gagal inisialisasi Firebase:", err);
+  alert("Gagal memuat konfigurasi. Silakan refresh halaman.");
 });
-
-loginFormButton.addEventListener('click', (event) => {
-  login()
-});
-
-initFirebase();
 
 async function initFirebase() {
-  
   const res = await fetch('https://qqihspdqkpjopgzjluxv.supabase.co/functions/v1/getSecret', {
     method: 'POST',
     headers: {
@@ -109,6 +112,7 @@ async function initFirebase() {
     },
     body: JSON.stringify({ name: 'Functions' })
   });
+
   const secret = await res.json();
   const firebaseConfig = {
     apiKey: secret.apiKey,
@@ -117,35 +121,25 @@ async function initFirebase() {
   };
 
   firebase.initializeApp(firebaseConfig);
-
 }
 
 
-
-let uid = "";
-let partner = "";
-let chatRef;
-
-
 async function handleMulaiButton() {
-  
-const db = firebase.firestore();
-
+  const db = firebase.firestore();
   const pin = pinField.value.trim();
 
-
   const credDoc = await db.collection("login").doc("credential").get();
-  
+
   if (!credDoc.exists) return alert("Password tidak ditemukan.");
   if (credDoc.data().password !== pin) return alert("PIN salah.");
 
   mulaiContainer.style.display = "none";
   afterContainer.style.display = "block";
-  
 }
+
+
 async function login() {
-  
-const db = firebase.firestore();
+  const db = firebase.firestore();
   const userId = usernameField.value.trim();
   const pin = passwordField.value.trim();
 
@@ -156,12 +150,8 @@ const db = firebase.firestore();
   uid = userId;
   partner = (uid === "syarif") ? "nadia" : "syarif";
 
-  
   const partnerDoc = await db.collection("users").doc(partner).get();
-  
 
-  // document.getElementById("currentUser").innerText = uid;
-  // document.getElementById("partnerUser").innerText = partner;
   chatForm.style.display = "block";
   loginForm.style.display = "none";
   titleForm.innerHTML = `Cobain chat sama ${partnerDoc.data().nama}`;
@@ -169,8 +159,8 @@ const db = firebase.firestore();
   startChat();
 }
 
-function startChat() {
 
+function startChat() {
   const db = firebase.firestore();
   const sessionId = uid < partner ? `${uid}_${partner}` : `${partner}_${uid}`;
   chatRef = db.collection("realtimeChats").doc(sessionId);
@@ -187,8 +177,6 @@ function startChat() {
   });
 
   textarea.addEventListener("input", () => {
-
-      console.log("Input event triggered");
     chatRef.set({
       [uid]: {
         uid,
@@ -198,4 +186,3 @@ function startChat() {
     }, { merge: true });
   });
 }
-
